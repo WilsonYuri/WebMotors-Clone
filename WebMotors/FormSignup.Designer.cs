@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSignup));
             this.Submit = new System.Windows.Forms.Button();
             this.PasswordLogin = new System.Windows.Forms.Label();
             this.PasswordSignUp = new System.Windows.Forms.TextBox();
@@ -44,6 +45,8 @@
             this.CPFSignUp = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.DateOfBirthSignUp = new System.Windows.Forms.DateTimePicker();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Submit
@@ -118,6 +121,7 @@
             this.FirstNameSignUp.Name = "FirstNameSignUp";
             this.FirstNameSignUp.Size = new System.Drawing.Size(211, 20);
             this.FirstNameSignUp.TabIndex = 12;
+            this.FirstNameSignUp.TextChanged += new System.EventHandler(this.FirstNameSignUp_TextChanged);
             // 
             // label2
             // 
@@ -193,11 +197,23 @@
             this.DateOfBirthSignUp.TabIndex = 22;
             this.DateOfBirthSignUp.Value = new System.DateTime(2023, 8, 23, 12, 2, 29, 0);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(1065, 618);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(73, 63);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 23;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // FormSignup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 682);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.DateOfBirthSignUp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -218,6 +234,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSignup";
             this.Load += new System.EventHandler(this.FormSignup_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +258,6 @@
         private System.Windows.Forms.TextBox CPFSignUp;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker DateOfBirthSignUp;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

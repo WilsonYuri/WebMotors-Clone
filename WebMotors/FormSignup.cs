@@ -93,6 +93,16 @@ namespace WebMotors
 
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Management management = new Management();
+            management.ShowDialog();
+        }
+
+        private void FirstNameSignUp_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
