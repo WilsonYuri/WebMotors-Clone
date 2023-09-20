@@ -34,24 +34,39 @@
             this.PasswordSignUp = new System.Windows.Forms.TextBox();
             this.EmailLogin = new System.Windows.Forms.Label();
             this.EmailSignUp = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label = new System.Windows.Forms.Label();
+            this.SignInLabel = new System.Windows.Forms.Label();
+            this.labelFirstName = new System.Windows.Forms.Label();
             this.FirstNameSignUp = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelLastName = new System.Windows.Forms.Label();
             this.LastNameSignUp = new System.Windows.Forms.TextBox();
             this.PhoneNumber = new System.Windows.Forms.Label();
             this.PhoneNumberSignUp = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelCPF = new System.Windows.Forms.Label();
             this.CPFSignUp = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelBirth = new System.Windows.Forms.Label();
             this.DateOfBirthSignUp = new System.Windows.Forms.DateTimePicker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnManage = new System.Windows.Forms.Button();
+            this.ManagementLabel = new System.Windows.Forms.Label();
+            this.PasswordPanel = new System.Windows.Forms.Panel();
+            this.enter = new System.Windows.Forms.Button();
+            this.PasswordManagement = new System.Windows.Forms.TextBox();
+            this.PasswordManage = new System.Windows.Forms.Label();
+            this.Overview = new System.Windows.Forms.ListView();
+            this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LastName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CPF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DateOfBirth = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.PasswordPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // Submit
             // 
-            this.Submit.Location = new System.Drawing.Point(502, 534);
+            this.Submit.Location = new System.Drawing.Point(430, 452);
             this.Submit.Name = "Submit";
             this.Submit.Size = new System.Drawing.Size(75, 23);
             this.Submit.TabIndex = 11;
@@ -94,50 +109,50 @@
             this.EmailSignUp.Size = new System.Drawing.Size(441, 20);
             this.EmailSignUp.TabIndex = 7;
             // 
-            // label1
+            // SignInLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(69, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 20);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "SignIn";
+            this.SignInLabel.AutoSize = true;
+            this.SignInLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.SignInLabel.Location = new System.Drawing.Point(69, 62);
+            this.SignInLabel.Name = "SignInLabel";
+            this.SignInLabel.Size = new System.Drawing.Size(61, 20);
+            this.SignInLabel.TabIndex = 6;
+            this.SignInLabel.Text = "SignIn";
             // 
-            // label
+            // labelFirstName
             // 
-            this.label.AutoSize = true;
-            this.label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label.Location = new System.Drawing.Point(70, 110);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(57, 13);
-            this.label.TabIndex = 13;
-            this.label.Text = "First Name";
-            this.label.Click += new System.EventHandler(this.label2_Click);
+            this.labelFirstName.AutoSize = true;
+            this.labelFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFirstName.Location = new System.Drawing.Point(70, 110);
+            this.labelFirstName.Name = "labelFirstName";
+            this.labelFirstName.Size = new System.Drawing.Size(57, 13);
+            this.labelFirstName.TabIndex = 13;
+            this.labelFirstName.Text = "First Name";
+            this.labelFirstName.Click += new System.EventHandler(this.label2_Click);
             // 
             // FirstNameSignUp
             // 
             this.FirstNameSignUp.Location = new System.Drawing.Point(73, 126);
             this.FirstNameSignUp.Name = "FirstNameSignUp";
-            this.FirstNameSignUp.Size = new System.Drawing.Size(211, 20);
+            this.FirstNameSignUp.Size = new System.Drawing.Size(374, 20);
             this.FirstNameSignUp.TabIndex = 12;
             this.FirstNameSignUp.TextChanged += new System.EventHandler(this.FirstNameSignUp_TextChanged);
             // 
-            // label2
+            // labelLastName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(302, 110);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Last Name";
+            this.labelLastName.AutoSize = true;
+            this.labelLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLastName.Location = new System.Drawing.Point(499, 110);
+            this.labelLastName.Name = "labelLastName";
+            this.labelLastName.Size = new System.Drawing.Size(58, 13);
+            this.labelLastName.TabIndex = 15;
+            this.labelLastName.Text = "Last Name";
             // 
             // LastNameSignUp
             // 
-            this.LastNameSignUp.Location = new System.Drawing.Point(305, 126);
+            this.LastNameSignUp.Location = new System.Drawing.Point(502, 126);
             this.LastNameSignUp.Name = "LastNameSignUp";
-            this.LastNameSignUp.Size = new System.Drawing.Size(209, 20);
+            this.LastNameSignUp.Size = new System.Drawing.Size(374, 20);
             this.LastNameSignUp.TabIndex = 14;
             // 
             // PhoneNumber
@@ -154,37 +169,37 @@
             // 
             this.PhoneNumberSignUp.Location = new System.Drawing.Point(73, 279);
             this.PhoneNumberSignUp.Name = "PhoneNumberSignUp";
-            this.PhoneNumberSignUp.Size = new System.Drawing.Size(441, 20);
+            this.PhoneNumberSignUp.Size = new System.Drawing.Size(211, 20);
             this.PhoneNumberSignUp.TabIndex = 16;
             this.PhoneNumberSignUp.TextChanged += new System.EventHandler(this.PhoneNumberSignUp_TextChanged);
             // 
-            // label3
+            // labelCPF
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(70, 313);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 13);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "CPF";
+            this.labelCPF.AutoSize = true;
+            this.labelCPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCPF.Location = new System.Drawing.Point(70, 313);
+            this.labelCPF.Name = "labelCPF";
+            this.labelCPF.Size = new System.Drawing.Size(27, 13);
+            this.labelCPF.TabIndex = 19;
+            this.labelCPF.Text = "CPF";
             // 
             // CPFSignUp
             // 
             this.CPFSignUp.Location = new System.Drawing.Point(73, 332);
             this.CPFSignUp.Name = "CPFSignUp";
-            this.CPFSignUp.Size = new System.Drawing.Size(441, 20);
+            this.CPFSignUp.Size = new System.Drawing.Size(211, 20);
             this.CPFSignUp.TabIndex = 18;
             // 
-            // label4
+            // labelBirth
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(70, 370);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 13);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "Date of Birth";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.labelBirth.AutoSize = true;
+            this.labelBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBirth.Location = new System.Drawing.Point(70, 370);
+            this.labelBirth.Name = "labelBirth";
+            this.labelBirth.Size = new System.Drawing.Size(66, 13);
+            this.labelBirth.TabIndex = 21;
+            this.labelBirth.Text = "Date of Birth";
+            this.labelBirth.Click += new System.EventHandler(this.label4_Click);
             // 
             // DateOfBirthSignUp
             // 
@@ -200,7 +215,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(1065, 618);
+            this.pictureBox1.Location = new System.Drawing.Point(1819, 966);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(73, 63);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -208,33 +223,157 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // btnManage
+            // 
+            this.btnManage.Location = new System.Drawing.Point(1779, 21);
+            this.btnManage.Name = "btnManage";
+            this.btnManage.Size = new System.Drawing.Size(91, 39);
+            this.btnManage.TabIndex = 25;
+            this.btnManage.Text = "Manage";
+            this.btnManage.UseVisualStyleBackColor = true;
+            this.btnManage.Click += new System.EventHandler(this.btnManage_Click);
+            // 
+            // ManagementLabel
+            // 
+            this.ManagementLabel.AutoSize = true;
+            this.ManagementLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManagementLabel.Location = new System.Drawing.Point(35, 40);
+            this.ManagementLabel.Name = "ManagementLabel";
+            this.ManagementLabel.Size = new System.Drawing.Size(293, 20);
+            this.ManagementLabel.TabIndex = 27;
+            this.ManagementLabel.Text = "Management of the login database ";
+            // 
+            // PasswordPanel
+            // 
+            this.PasswordPanel.Controls.Add(this.enter);
+            this.PasswordPanel.Controls.Add(this.PasswordManagement);
+            this.PasswordPanel.Controls.Add(this.PasswordManage);
+            this.PasswordPanel.Location = new System.Drawing.Point(708, 481);
+            this.PasswordPanel.Name = "PasswordPanel";
+            this.PasswordPanel.Size = new System.Drawing.Size(478, 102);
+            this.PasswordPanel.TabIndex = 26;
+            // 
+            // enter
+            // 
+            this.enter.Location = new System.Drawing.Point(208, 59);
+            this.enter.Name = "enter";
+            this.enter.Size = new System.Drawing.Size(75, 23);
+            this.enter.TabIndex = 13;
+            this.enter.Text = "Enter";
+            this.enter.UseVisualStyleBackColor = true;
+            this.enter.Click += new System.EventHandler(this.enter_Click);
+            // 
+            // PasswordManagement
+            // 
+            this.PasswordManagement.Location = new System.Drawing.Point(24, 33);
+            this.PasswordManagement.Name = "PasswordManagement";
+            this.PasswordManagement.PasswordChar = '*';
+            this.PasswordManagement.Size = new System.Drawing.Size(441, 20);
+            this.PasswordManagement.TabIndex = 11;
+            // 
+            // PasswordManage
+            // 
+            this.PasswordManage.AutoSize = true;
+            this.PasswordManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordManage.Location = new System.Drawing.Point(21, 14);
+            this.PasswordManage.Name = "PasswordManage";
+            this.PasswordManage.Size = new System.Drawing.Size(53, 13);
+            this.PasswordManage.TabIndex = 12;
+            this.PasswordManage.Text = "Password";
+            // 
+            // Overview
+            // 
+            this.Overview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.id,
+            this.FirstName,
+            this.LastName,
+            this.Email,
+            this.columnHeader1,
+            this.CPF,
+            this.DateOfBirth});
+            this.Overview.HideSelection = false;
+            this.Overview.Location = new System.Drawing.Point(39, 74);
+            this.Overview.Name = "Overview";
+            this.Overview.Size = new System.Drawing.Size(1831, 946);
+            this.Overview.TabIndex = 24;
+            this.Overview.UseCompatibleStateImageBehavior = false;
+            this.Overview.View = System.Windows.Forms.View.Details;
+            this.Overview.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Overview_MouseDoubleClick);
+            // 
+            // id
+            // 
+            this.id.Text = "ID";
+            this.id.Width = 40;
+            // 
+            // FirstName
+            // 
+            this.FirstName.Text = "FirstName";
+            this.FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.FirstName.Width = 113;
+            // 
+            // LastName
+            // 
+            this.LastName.Text = "LastName";
+            this.LastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.LastName.Width = 109;
+            // 
+            // Email
+            // 
+            this.Email.Text = "Email";
+            this.Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Email.Width = 116;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Phone Number";
+            this.columnHeader1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader1.Width = 101;
+            // 
+            // CPF
+            // 
+            this.CPF.Text = "CPF";
+            this.CPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.CPF.Width = 86;
+            // 
+            // DateOfBirth
+            // 
+            this.DateOfBirth.Text = "Date Of Birth";
+            this.DateOfBirth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DateOfBirth.Width = 107;
+            // 
             // FormSignup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1141, 682);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.btnManage);
+            this.Controls.Add(this.ManagementLabel);
+            this.Controls.Add(this.PasswordPanel);
+            this.Controls.Add(this.Overview);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.DateOfBirthSignUp);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelBirth);
+            this.Controls.Add(this.labelCPF);
             this.Controls.Add(this.CPFSignUp);
             this.Controls.Add(this.PhoneNumber);
             this.Controls.Add(this.PhoneNumberSignUp);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelLastName);
             this.Controls.Add(this.LastNameSignUp);
-            this.Controls.Add(this.label);
+            this.Controls.Add(this.labelFirstName);
             this.Controls.Add(this.FirstNameSignUp);
             this.Controls.Add(this.Submit);
             this.Controls.Add(this.PasswordLogin);
             this.Controls.Add(this.PasswordSignUp);
             this.Controls.Add(this.EmailLogin);
             this.Controls.Add(this.EmailSignUp);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.SignInLabel);
             this.Name = "FormSignup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSignup";
             this.Load += new System.EventHandler(this.FormSignup_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.PasswordPanel.ResumeLayout(false);
+            this.PasswordPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,17 +386,31 @@
         private System.Windows.Forms.TextBox PasswordSignUp;
         private System.Windows.Forms.Label EmailLogin;
         private System.Windows.Forms.TextBox EmailSignUp;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.Label SignInLabel;
+        private System.Windows.Forms.Label labelFirstName;
         private System.Windows.Forms.TextBox FirstNameSignUp;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelLastName;
         private System.Windows.Forms.TextBox LastNameSignUp;
         private System.Windows.Forms.Label PhoneNumber;
         private System.Windows.Forms.TextBox PhoneNumberSignUp;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelCPF;
         private System.Windows.Forms.TextBox CPFSignUp;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelBirth;
         private System.Windows.Forms.DateTimePicker DateOfBirthSignUp;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnManage;
+        private System.Windows.Forms.Label ManagementLabel;
+        private System.Windows.Forms.Panel PasswordPanel;
+        private System.Windows.Forms.Button enter;
+        private System.Windows.Forms.TextBox PasswordManagement;
+        private System.Windows.Forms.Label PasswordManage;
+        private System.Windows.Forms.ListView Overview;
+        private System.Windows.Forms.ColumnHeader id;
+        private System.Windows.Forms.ColumnHeader FirstName;
+        private System.Windows.Forms.ColumnHeader LastName;
+        private System.Windows.Forms.ColumnHeader Email;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader CPF;
+        private System.Windows.Forms.ColumnHeader DateOfBirth;
     }
 }

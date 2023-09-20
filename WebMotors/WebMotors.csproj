@@ -47,12 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
-    <Compile Include="Management.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Management.Designer.cs">
-      <DependentUpon>Management.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormSignup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,9 +76,6 @@
     <EmbeddedResource Include="FormsLogin.resx">
       <DependentUpon>FormsLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Management.resx">
-      <DependentUpon>Management.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -107,6 +98,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sources\RowCars1\Corolla.jpg" />
+    <Content Include="Sources\RowCars1\Fiat Chronos.jpg" />
+    <Content Include="Sources\RowCars1\Fiat Toro.jpg" />
+    <Content Include="Sources\RowCars1\Ford Focus.jpg" />
+    <Content Include="Sources\RowCars1\HRV.jpg" />
+    <Content Include="Sources\RowCars1\Jeep Compass.jpg" />
+    <Content Include="Sources\RowCars2\320i.jpg" />
+    <Content Include="Sources\RowCars2\Amarok.jpg" />
+    <Content Include="Sources\RowCars2\Gol.jpg" />
+    <Content Include="Sources\RowCars2\Mini cooper.jpg" />
+    <Content Include="Sources\RowCars2\Onix.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
