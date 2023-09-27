@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -18,6 +19,8 @@ namespace WebMotors
             PasswordPanel.Visible = false;
             ManagementLabel.Visible = false;
             btnManage.Visible = false;
+            btn_Submit_Edit.Visible = false;
+            btn_delete.Visible = false;
             // --
             SignInLabel.Visible = true;
             FirstNameSignUp.Visible = true;
@@ -171,7 +174,6 @@ namespace WebMotors
         {
             PasswordPanel.Visible = true;
             btnManage.Visible = true;
-
             //-- 
 
             SignInLabel.Visible = false;
@@ -191,6 +193,8 @@ namespace WebMotors
             labelBirth.Visible = false;
             DateOfBirthSignUp.Visible = false;
             Submit.Visible = false;
+            btn_delete.Visible = false;
+            btn_Submit_Edit.Visible = false;
         }
 
         private void FirstNameSignUp_TextChanged(object sender, EventArgs e)
@@ -213,7 +217,7 @@ namespace WebMotors
         private void btnManage_Click(object sender, EventArgs e)
         {
             Overview.Visible = false;
-            PasswordPanel.Visible = true;
+            PasswordPanel.Visible = false;
             ManagementLabel.Visible = false;
             // --
             SignInLabel.Visible = true;
@@ -232,7 +236,7 @@ namespace WebMotors
             CPFSignUp.Visible = true;
             labelBirth.Visible = true;
             DateOfBirthSignUp.Visible = true;
-            Submit.Visible = true;
+            btn_Submit_Edit.Visible = true;
 
             Overview.Items.Clear();
 
@@ -247,7 +251,7 @@ namespace WebMotors
              Password = @Password, 
              PhoneNumber = @PhoneNumber, 
              CPF = @CPF, 
-             DateOfBirth = @DateOfBirth,
+             DateOfBirth = @DateOfBirth
              WHERE id = @id";
 
             sqlCom.Parameters.AddWithValue("@FirstName", FirstNameSignUp.Text);
@@ -293,11 +297,35 @@ namespace WebMotors
             finally
             {
                 conn.CloseConnection();
-            }
+            }            
         }
 
         private void Overview_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            Overview.Visible = false;
+            PasswordPanel.Visible = false;
+            ManagementLabel.Visible = false;
+
+            // --
+            SignInLabel.Visible = true;
+            FirstNameSignUp.Visible = true;
+            labelFirstName.Visible = true;
+            FirstNameSignUp.Visible = true;
+            labelLastName.Visible = true;
+            LastNameSignUp.Visible = true;
+            EmailLogin.Visible = true;
+            EmailSignUp.Visible = true;
+            PasswordLogin.Visible = true;
+            PasswordSignUp.Visible = true;
+            PhoneNumber.Visible = true;
+            PhoneNumberSignUp.Visible = true;
+            labelCPF.Visible = true;
+            CPFSignUp.Visible = true;
+            labelBirth.Visible = true;
+            DateOfBirthSignUp.Visible = true;
+            btn_Submit_Edit.Visible = true;
+            btn_delete.Visible = true;
+
             int index;
             try
             {
@@ -306,17 +334,108 @@ namespace WebMotors
                 FirstNameSignUp.Text = Overview.Items[index].SubItems[1].Text;
                 LastNameSignUp.Text = Overview.Items[index].SubItems[2].Text;
                 EmailSignUp.Text = Overview.Items[index].SubItems[3].Text;
-                PasswordSignUp.Text = Overview.Items[index].SubItems[4].Text;
-                PhoneNumberSignUp.Text = Overview.Items[index].SubItems[5].Text;
-                CPFSignUp.Text = Overview.Items[index].SubItems[6].Text;
-                DateOfBirthSignUp.Value = Convert.ToDateTime(Overview.Items[index].SubItems[7].Text);
+                //PasswordSignUp.Text = Overview.Items[index].SubItems[4].Text;
+                PhoneNumberSignUp.Text = Overview.Items[index].SubItems[4].Text;
+                CPFSignUp.Text = Overview.Items[index].SubItems[5].Text;
+                DateOfBirthSignUp.Value = Convert.ToDateTime(Overview.Items[index].SubItems[6].Text);
 
             }
-            catch
+            catch(Exception i)
+            
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(i.Message);
             }
     }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Overview.Visible = false;
+
+            SignInLabel.Visible = true;
+            FirstNameSignUp.Visible = true;
+            labelFirstName.Visible = true;
+            FirstNameSignUp.Visible = true;
+            labelLastName.Visible = true;
+            LastNameSignUp.Visible = true;
+            EmailLogin.Visible = true;
+            EmailSignUp.Visible = true;
+            PasswordLogin.Visible = true;
+            PasswordSignUp.Visible = true;
+            PhoneNumber.Visible = true;
+            PhoneNumberSignUp.Visible = true;
+            labelCPF.Visible = true;
+            CPFSignUp.Visible = true;
+            labelBirth.Visible = true;
+            DateOfBirthSignUp.Visible = true;
+            Submit.Visible = true;
+
+        }
+
+        private void Overview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btn_Show_Click(object sender, EventArgs e)
+        {
+            Overview.Visible = true;
+            btn_delete.Visible = false;
+
+            SignInLabel.Visible = false;
+            FirstNameSignUp.Visible = false;
+            labelFirstName.Visible = false;
+            FirstNameSignUp.Visible = false;
+            labelLastName.Visible = false;
+            LastNameSignUp.Visible = false;
+            EmailLogin.Visible = false;
+            EmailSignUp.Visible = false;
+            PasswordLogin.Visible = false;
+            PasswordSignUp.Visible = false;
+            PhoneNumber.Visible = false;
+            PhoneNumberSignUp.Visible = false;
+            labelCPF.Visible = false;
+            CPFSignUp.Visible = false;
+            labelBirth.Visible = false;
+            DateOfBirthSignUp.Visible = false;
+            btn_Submit_Edit.Visible = false;
+            
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            Connection connection = new Connection();
+            SqlCommand sqlCommand = new SqlCommand();
+
+            sqlCommand.Connection = connection.ReturnConnection();
+            sqlCommand.CommandText = @"DELETE FROM SignUp_Info WHERE Id = @id";
+            sqlCommand.Parameters.AddWithValue("@id", Id);
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception err)
+            {
+                throw new Exception("Erro: Problemas ao excluir usuário no banco.\n" + err.Message);
+            }
+            finally
+            {
+                connection.CloseConnection();
+                MessageBox.Show("Usuário deletado");
+                Close();
+            }
+
+            UpdateListView();
+        }
+
+        private void PasswordManagement_TextChanged(object sender, EventArgs e)
+        {
+            .
+        }
     }
 }
 

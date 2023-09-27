@@ -60,6 +60,8 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CPF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DateOfBirth = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btn_Submit_Edit = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PasswordPanel.SuspendLayout();
             this.SuspendLayout();
@@ -270,6 +272,7 @@
             this.PasswordManagement.PasswordChar = '*';
             this.PasswordManagement.Size = new System.Drawing.Size(441, 20);
             this.PasswordManagement.TabIndex = 11;
+            this.PasswordManagement.TextChanged += new System.EventHandler(this.PasswordManagement_TextChanged);
             // 
             // PasswordManage
             // 
@@ -291,13 +294,15 @@
             this.columnHeader1,
             this.CPF,
             this.DateOfBirth});
+            this.Overview.FullRowSelect = true;
             this.Overview.HideSelection = false;
             this.Overview.Location = new System.Drawing.Point(39, 74);
             this.Overview.Name = "Overview";
-            this.Overview.Size = new System.Drawing.Size(1831, 946);
+            this.Overview.Size = new System.Drawing.Size(1774, 946);
             this.Overview.TabIndex = 24;
             this.Overview.UseCompatibleStateImageBehavior = false;
             this.Overview.View = System.Windows.Forms.View.Details;
+            this.Overview.SelectedIndexChanged += new System.EventHandler(this.Overview_SelectedIndexChanged);
             this.Overview.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Overview_MouseDoubleClick);
             // 
             // id
@@ -341,6 +346,26 @@
             this.DateOfBirth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.DateOfBirth.Width = 107;
             // 
+            // btn_Submit_Edit
+            // 
+            this.btn_Submit_Edit.Location = new System.Drawing.Point(503, 452);
+            this.btn_Submit_Edit.Name = "btn_Submit_Edit";
+            this.btn_Submit_Edit.Size = new System.Drawing.Size(75, 23);
+            this.btn_Submit_Edit.TabIndex = 30;
+            this.btn_Submit_Edit.Text = "Submit";
+            this.btn_Submit_Edit.UseVisualStyleBackColor = true;
+            this.btn_Submit_Edit.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.Location = new System.Drawing.Point(801, 452);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(75, 23);
+            this.btn_delete.TabIndex = 32;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
             // FormSignup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,6 +392,8 @@
             this.Controls.Add(this.EmailLogin);
             this.Controls.Add(this.EmailSignUp);
             this.Controls.Add(this.SignInLabel);
+            this.Controls.Add(this.btn_Submit_Edit);
+            this.Controls.Add(this.btn_delete);
             this.Name = "FormSignup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSignup";
@@ -412,5 +439,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader CPF;
         private System.Windows.Forms.ColumnHeader DateOfBirth;
+        private System.Windows.Forms.Button btn_Submit_Edit;
+        private System.Windows.Forms.Button btn_delete;
     }
 }
