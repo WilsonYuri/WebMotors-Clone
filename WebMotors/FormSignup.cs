@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -378,7 +379,44 @@ namespace WebMotors
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            Connection connection = new Connection();
+            SqlCommand sqlCommand = new SqlCommand();
+
+            sqlCommand.Connection = connection.ReturnConnection();
+            sqlCommand.CommandText = @"UPDATE SignUp_Info SET   
+             FirstName = @FirstName,
+             LastName = @LastName, 
+             Email = @Email,
+             Password = @Password, 
+             PhoneNumber = @PhoneNumber, 
+             CPF = @CPF, 
+             DateOfBirth = @DateOfBirth
+             WHERE id = @id";
+
+            sqlCommand.Parameters.AddWithValue("@FirstName", FirstNameSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@LastName", LastNameSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@Email", EmailSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@Password", PasswordSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@PhoneNumber", PhoneNumberSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@CPF", CPFSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@DateOfBirth", DateOfBirthSignUp.Value);
+            sqlCommand.Parameters.AddWithValue("@id", Id);
+
+            sqlCommand.ExecuteNonQuery();
+
+            MessageBox.Show("Cadastro alterado com sucesso",
+                "AVISO",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+            FirstNameSignUp.Clear();
+            LastNameSignUp.Clear();
+            EmailSignUp.Clear();
+            PasswordSignUp.Clear();
+            PhoneNumberSignUp.Clear();
+            CPFSignUp.Clear();
+
+            UpdateListView();
         }
 
         private void btn_Show_Click(object sender, EventArgs e)
@@ -408,33 +446,22 @@ namespace WebMotors
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            Connection connection = new Connection();
-            SqlCommand sqlCommand = new SqlCommand();
-
-            sqlCommand.Connection = connection.ReturnConnection();
-            sqlCommand.CommandText = @"DELETE FROM SignUp_Info WHERE Id = @id";
-            sqlCommand.Parameters.AddWithValue("@id", Id);
-            try
-            {
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch (Exception err)
-            {
-                throw new Exception("Erro: Problemas ao excluir usuário no banco.\n" + err.Message);
-            }
-            finally
-            {
-                connection.CloseConnection();
-                MessageBox.Show("Usuário deletado");
-                Close();
-            }
+            UserDAO userDAO = new UserDAO();
+            userDAO.DeleteUser(Id);
 
             UpdateListView();
+
+            FirstNameSignUp.Clear();
+            LastNameSignUp.Clear();
+            EmailSignUp.Clear();
+            PasswordSignUp.Clear();
+            PhoneNumberSignUp.Clear();
+            CPFSignUp.Clear();
         }
 
         private void PasswordManagement_TextChanged(object sender, EventArgs e)
         {
-            .
+            
         }
     }
 }
