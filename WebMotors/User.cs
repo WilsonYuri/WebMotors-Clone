@@ -17,55 +17,68 @@ namespace WebMotors
         private string _cPF;
         private DateTime _dateOfBirth;
 
-        public User(int id, string firstname, string lastname, string email, string password, string phonenumber, string cpf, DateTime dateofbirth)
+        public User(/*int id,*/ 
+            string firstname, 
+            string lastname, 
+            string email, 
+            string password, 
+            string phonenumber, 
+            string cpf, 
+            DateTime dateofbirth)
         {
-            Id = id;
-            Firstname = firstname;
-            Lastname = lastname;
-            Email = email;
-            Password = password;
-            PhoneNumber = phonenumber;
-            Cpf = cpf;
-            DateOfBirth = dateofbirth;
+             //ID = id;
+             Firstname = firstname;
+             Lastname = lastname;
+             Email = email;
+             PassWord = password;
+             PhoneNumber = phonenumber;
+             Cpf = cpf;
+             DateOfBirth = dateofbirth;
 
         }
-        public int Firstname
+
+        public int ID
+        {
+            set{ _id = value; }
+            get { return _id; }
+        }
+        public String Firstname
         {
             set { _firstname = value;  }
             get { return _firstname; }
         }
-        public int Lastname
+        public String Lastname
         {
             set { _lastname = value; }
             get { return _lastname; }
         }
 
-        public int Email
+        public String Email
         {
             set { _email = value; }
             get { return _email; }
         }
-        public int Password
+        public String PassWord
         {
             set { _password = value; }
             get { return _password; }
         }
-        public int Password
+        public String Password
         {
             set { _password = value; }
             get { return _password; }
         }
-        public int PhoneNumber
+        public String PhoneNumber
         {
             set { _phoneNumber = value; }
             get { return PhoneNumber; }
         }
-        public int Cpf
+        public String Cpf
         {
             set { _cPF = value; }
             get { return _cPF; }
         }
-        public int DateOfBirth
+        public DateTime DateOfBirth
         {
             set { _dateOfBirth = value; }
             get { return _dateOfBirth; }

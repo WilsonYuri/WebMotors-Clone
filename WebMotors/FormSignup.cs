@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Text.RegularExpressions;
+using System.Net;
 using System.Windows.Forms;
 
 namespace WebMotors
@@ -69,40 +67,26 @@ namespace WebMotors
 
         private void UpdateListView()
         {
+
             Overview.Items.Clear();
-
-            Connection conn = new Connection();
-            SqlCommand sqlCom = new SqlCommand();
-
-            sqlCom.Connection = conn.ReturnConnection();
-            sqlCom.CommandText = "SELECT Id, FirstName, LastName, Email, PhoneNumber, CPF, DateOfBirth FROM SignUp_Info";
+            UserDAO userDAO = new UserDAO();
+            List<User> user = userDAO.SelectUser();
 
             try
             {
-                SqlDataReader dr = sqlCom.ExecuteReader();
-
-                //Enquanto for possível continuar a leitura das linhas que foram retornadas na consulta, execute.
-                while (dr.Read())
-                {
-                    int id = (int)dr["id"];
-                    string FirstName = (string)dr["FirstName"];
-                    string LastName = (string)dr["LastName"];
-                    string Email = (string)dr["Email"];
-                    string PhoneNumber = (string)dr["PhoneNumber"];
-                    string CPF = (string)dr["CPF"];
-                    DateTime DateOfBirth = (DateTime)dr["DateOfBirth"];
-
-                    ListViewItem lv = new ListViewItem(id.ToString());
-                    lv.SubItems.Add(FirstName);
-                    lv.SubItems.Add(LastName);
-                    lv.SubItems.Add(Email);
-                    lv.SubItems.Add(PhoneNumber);
-                    lv.SubItems.Add(CPF);
-                    lv.SubItems.Add(DateOfBirth.ToShortDateString());
-                    Overview.Items.Add(lv);
-
+                foreach (User userItem in user) {
+                    ListViewItem lv = new ListViewItem(user.Id.ToString());
+                lv.SubItems.Add(FirstName);
+                lv.SubItems.Add(LastName);
+                lv.SubItems.Add(Email);
+                lv.SubItems.Add(PhoneNumber);
+                lv.SubItems.Add(CPF);
+                lv.SubItems.Add(DateOfBirth.ToShortDateString());
+                Overview.Items.Add(lv);               
                 }
-                dr.Close();
+
+
+
             }
             catch (Exception err)
             {
@@ -115,55 +99,22 @@ namespace WebMotors
         }
 
 
+
         private void Submit_Click(object sender, EventArgs e)
         {
-
-            string email = EmailSignUp.Text;
-
-            Connection connection = new Connection();
-            SqlCommand sqlCommand = new SqlCommand();
-
-            sqlCommand.Connection = connection.ReturnConnection();
-            sqlCommand.CommandText = @"INSERT INTO SignUp_Info VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @Password, @CPF, @DateOfBirth)";
-
-            sqlCommand.Parameters.AddWithValue("@FirstName", FirstNameSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@LastName", LastNameSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@Email", EmailSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@Password", PasswordSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@PhoneNumber", PhoneNumberSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@CPF", CPFSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@DateOfBirth", DateOfBirthSignUp.Value);
-
-            if (IsValidEmail(email))
+            try
             {
-                sqlCommand.ExecuteNonQuery();
-                Created = true;
+                User user = new User(FirstNameSignUp.Text, LastNameSignUp.Text, EmailSignUp.Text, PasswordSignUp.Text, PhoneNumberSignUp.Text, CPFSignUp.Text, DateOfBirthSignUp.Value);
 
-                FirstNameSignUp.Clear();
-                LastNameSignUp.Clear();
-                EmailSignUp.Clear();
-                PasswordSignUp.Clear();
-                PhoneNumberSignUp.Clear();
-                CPFSignUp.Clear();
-
-                Close();
+                UserDAO userdao = new UserDAO();
+                userdao.InsertUser(user);
             }
-            else
+
+            catch (Exception error)
             {
-                MessageBox.Show("O endereço de e - mail é inválido");
-
+                MessageBox.Show(error.Message);
             }
-        }
-        private bool IsValidEmail(string email)
-        {
-            // Define a expressão regular para validar um endereço de e-mail
-            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
-            // Cria um objeto Regex com a expressão regular
-            Regex regex = new Regex(pattern);
-
-            // Usa o método Match para verificar se o email corresponde ao padrão
-            return regex.IsMatch(email);
         }
 
         private void PhoneNumberSignUp_TextChanged(object sender, EventArgs e)
@@ -293,12 +244,12 @@ namespace WebMotors
             }
             catch (Exception err)
             {
-                MessageBox.Show("Erro "+ err.Message);
+                MessageBox.Show("Erro " + err.Message);
             }
             finally
             {
                 conn.CloseConnection();
-            }            
+            }
         }
 
         private void Overview_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -341,12 +292,12 @@ namespace WebMotors
                 DateOfBirthSignUp.Value = Convert.ToDateTime(Overview.Items[index].SubItems[6].Text);
 
             }
-            catch(Exception i)
-            
+            catch (Exception i)
+
             {
                 MessageBox.Show(i.Message);
             }
-    }
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -441,7 +392,7 @@ namespace WebMotors
             labelBirth.Visible = false;
             DateOfBirthSignUp.Visible = false;
             btn_Submit_Edit.Visible = false;
-            
+
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -461,7 +412,7 @@ namespace WebMotors
 
         private void PasswordManagement_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
