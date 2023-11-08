@@ -153,7 +153,7 @@ namespace WebMotors
             sqlCom.Connection = conn.ReturnConnection();
             sqlCom.CommandText = "SELECT FirstName, LastName, Email, PhoneNumber, Password, CPF, DateOfBirth";
 
-            List<User> Users;
+            List<User> Users = new List<User>();
             try
             {
                 SqlDataReader dr = sqlCom.ExecuteReader();
@@ -169,6 +169,7 @@ namespace WebMotors
                     (string)dr["CPF"],
                     (DateTime)dr["DateOfBirth"]
                     );
+                    Users.Add(user);
                 }
 
                 dr.Close();

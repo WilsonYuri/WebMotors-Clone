@@ -79,13 +79,13 @@ namespace WebMotors
             {
                 foreach (User userItem in Users)
                 {
-                    ListViewItem lv = new ListViewItem(User.ID.ToString());
-                    lv.SubItems.Add(User.Firstname);
-                    lv.SubItems.Add(User.Lastname);
-                    lv.SubItems.Add(User.Email);
-                    lv.SubItems.Add(User.PhoneNumber);
-                    lv.SubItems.Add(User.Cpf);
-                    lv.SubItems.Add(User.DateOfBirth);
+                    ListViewItem lv = new ListViewItem(userItem.ID.ToString());
+                    lv.SubItems.Add(userItem.Firstname);
+                    lv.SubItems.Add(userItem.Lastname);
+                    lv.SubItems.Add(userItem.Email);
+                    lv.SubItems.Add(userItem.PhoneNumber);
+                    lv.SubItems.Add(userItem.Cpf);
+                    lv.SubItems.Add(userItem.DateOfBirth.ToShortDateString());
                     Overview.Items.Add(lv);
                 }
 
