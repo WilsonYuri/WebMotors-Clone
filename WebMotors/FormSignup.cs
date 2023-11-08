@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Net;
 using System.Windows.Forms;
@@ -65,24 +66,27 @@ namespace WebMotors
 
         }
 
-        private void UpdateListView()
+        public void UpdateListView()
         {
-
             Overview.Items.Clear();
+            Connection conn = new Connection();
+            SqlCommand sqlCom = new SqlCommand();
+
             UserDAO userDAO = new UserDAO();
-            List<User> user = userDAO.SelectUser();
+            List<User> Users = userDAO.SelectUser();
 
             try
             {
-                foreach (User userItem in user) {
-                    ListViewItem lv = new ListViewItem(user.Id.ToString());
-                lv.SubItems.Add(FirstName);
-                lv.SubItems.Add(LastName);
-                lv.SubItems.Add(Email);
-                lv.SubItems.Add(PhoneNumber);
-                lv.SubItems.Add(CPF);
-                lv.SubItems.Add(DateOfBirth.ToShortDateString());
-                Overview.Items.Add(lv);               
+                foreach (User userItem in Users)
+                {
+                    ListViewItem lv = new ListViewItem(User.ID.ToString());
+                    lv.SubItems.Add(User.Firstname);
+                    lv.SubItems.Add(User.Lastname);
+                    lv.SubItems.Add(User.Email);
+                    lv.SubItems.Add(User.PhoneNumber);
+                    lv.SubItems.Add(User.Cpf);
+                    lv.SubItems.Add(User.DateOfBirth);
+                    Overview.Items.Add(lv);
                 }
 
 

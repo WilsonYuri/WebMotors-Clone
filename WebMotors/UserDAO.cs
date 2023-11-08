@@ -1,12 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Runtime.Remoting.Contexts;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WebMotors
 {
     internal class UserDAO
     {
+
+        public static bool IsCpf(string detectCpf)
+        {
+            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            string tempCpf;
+            string digito;
+            int soma;
+            int resto;
+            detectCpf = detectCpf.Trim();
+            detectCpf = detectCpf.Replace(".", "").Replace("-", "");
+            if (detectCpf.Length != 11)
+                return false;
+            tempCpf = detectCpf.Substring(0, 9);
+            soma = 0;
+
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+            resto = soma % 11;
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+            digito = resto.ToString();
+            tempCpf = tempCpf + digito;
+            soma = 0;
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+            resto = soma % 11;
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+            digito = digito + resto.ToString();
+            return detectCpf.EndsWith(digito);
+        }
+
+
         public void DeleteUser(int Id)
         {
             Connection connection = new Connection();
@@ -33,6 +74,15 @@ namespace WebMotors
         {
 
         }
+        public bool IsValidPassword(string password)
+        {
+            // Validate strong password
+            string passwordPattern = ("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
+
+            Regex validatePassword = new Regex(passwordPattern);
+
+            return validatePassword.IsMatch(password);
+        }
 
         public bool IsValidEmail(string email)
         {
@@ -49,8 +99,10 @@ namespace WebMotors
         public void InsertUser(User user)
         {
             string email = user.Email;
+            string CPF = user.Cpf;
+            string password = user.PassWord;
 
-            Connection connection = new Connection();
+        Connection connection = new Connection();
             SqlCommand sqlCommand = new SqlCommand();
 
             sqlCommand.Connection = connection.ReturnConnection();
@@ -64,51 +116,65 @@ namespace WebMotors
             sqlCommand.Parameters.AddWithValue("@CPF", user.Cpf);
             sqlCommand.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
 
-            if (IsValidEmail(email))
+
+            if (IsValidEmail(email) == true)
             {
-                sqlCommand.ExecuteNonQuery();
+                if (IsValidPassword(password) == true)
+                { 
+                
+                    if (IsCpf(CPF) == true)
+                    {
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        MessageBox.Show("O endereço de e - mail é inválido");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("A senha é inválida");
+                }
             }
             else
             {
-                MessageBox.Show("O endereço de e - mail é inválido");
+                MessageBox.Show("O CPF é inválido");
+            };
 
-            }
+
 
         }
 
-        public List <User> SelectUser()
+        public List<User> SelectUser()
         {
             Connection conn = new Connection();
             SqlCommand sqlCom = new SqlCommand();
 
             sqlCom.Connection = conn.ReturnConnection();
-            sqlCom.CommandText = "SELECT Id, FirstName, LastName, Email, PhoneNumber, CPF, DateOfBirth FROM SignUp_Info";
+            sqlCom.CommandText = "SELECT FirstName, LastName, Email, PhoneNumber, Password, CPF, DateOfBirth";
 
-            List <User> Users;
-
+            List<User> Users;
             try
             {
                 SqlDataReader dr = sqlCom.ExecuteReader();
-
                 //Enquanto for possível continuar a leitura das linhas que foram retornadas na consulta, execute.
                 while (dr.Read())
                 {
                     User user = new User(
-                        (string)dr["Id"],
-                        (string)dr["FirstName"],
-                        (string)dr["LastName"],
-                        (string)dr["Email"],
-                        (string)dr["PhoneNumber"],
-                        (string)dr["CPF"],
-                        (DateTime)dr["DateOfBirth"]
-                        );
-
-
+                    (string)dr["Id"],
+                    (string)dr["FirstName"],
+                    (string)dr["LastName"],
+                    (string)dr["Email"],
+                    (string)dr["PhoneNumber"],
+                    (string)dr["CPF"],
+                    (DateTime)dr["DateOfBirth"]
+                    );
                 }
-                dr.Close();
 
+                dr.Close();
                 return Users;
             }
+
             catch (Exception error)
             {
                 MessageBox.Show(error.Message);
@@ -117,7 +183,13 @@ namespace WebMotors
             {
                 conn.CloseConnection();
             }
+
             return null;
+
         }
     }
 }
+        
+        
+    
+
