@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Runtime.Remoting.Contexts;
@@ -72,8 +72,51 @@ namespace WebMotors
         }
         public void UpdateUser()
         {
+            string email = user.Email;
+            string CPF = user.Cpf;
+            string password = user.PassWord;
 
+            Connection connection = new Connection();
+            SqlCommand sqlCommand = new SqlCommand();
+
+            sqlCommand.Connection = connection.ReturnConnection();
+            sqlCommand.CommandText = @"UPDATE INTO SignUp_Info VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @Password, @CPF, @DateOfBirth)";
+
+            sqlCommand.Parameters.AddWithValue("@FirstName", user.Firstname);
+            sqlCommand.Parameters.AddWithValue("@LastName", user.Lastname);
+            sqlCommand.Parameters.AddWithValue("@Email", user.Email);
+            sqlCommand.Parameters.AddWithValue("@Password", user.PassWord);
+            sqlCommand.Parameters.AddWithValue("@PhoneNumber", user.PhoneNumber);
+            sqlCommand.Parameters.AddWithValue("@CPF", user.Cpf);
+            sqlCommand.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
+
+
+            if (IsValidEmail(email) == true)
+            {
+                if (IsValidPassword(password) == true)
+                { 
+                
+                    if (IsCpf(CPF) == true)
+                    {
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        MessageBox.Show("O endereço de e - mail é inválido");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("A senha é inválida");
+                }
+            }
+            else
+            {
+                MessageBox.Show("O CPF é inválido");
+            };
         }
+
+
         public bool IsValidPassword(string password)
         {
             // Validate strong password
