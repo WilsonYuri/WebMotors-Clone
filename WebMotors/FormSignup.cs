@@ -1,8 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Net;
+using System.Text;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+//using System.IdentityModel;
 
 namespace WebMotors
 {
@@ -48,7 +50,29 @@ namespace WebMotors
         }
 
 
+        public string Encrypt(string plainText)
+        {
+            if (plainText == null) throw new ArgumentNullException("plainText");
 
+            //encrypt data
+            var data = Encoding.Unicode.GetBytes(plainText);
+            byte[] encrypted = ProtectedData.Protect(data, null, Scope);
+
+            //return as base64 string
+            return Convert.ToBase64String(encrypted);
+        }
+
+        public string Decrypt(string cipher)
+        {
+            if (cipher == null) throw new ArgumentNullException("cipher");
+
+            //parse base64 string
+            byte[] data = Convert.FromBase64String(cipher);
+
+            //decrypt data
+            byte[] decrypted = ProtectedData.Unprotect(data, null, Scope);
+            return Encoding.Unicode.GetString(decrypted);
+        }
         private void FormSignup_Load(object sender, EventArgs e)
         {
 
@@ -112,6 +136,8 @@ namespace WebMotors
 
                 UserDAO userdao = new UserDAO();
                 userdao.InsertUser(user);
+
+                MessageBox.Show("Cadastro concluido com sucesso!");
             }
 
             catch (Exception error)
@@ -334,18 +360,35 @@ namespace WebMotors
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                User user = new User(FirstNameSignUp.Text, LastNameSignUp.Text, EmailSignUp.Text, PasswordSignUp.Text, PhoneNumberSignUp.Text, CPFSignUp.Text, DateOfBirthSignUp.Value);
+            Connection connection = new Connection();
+            SqlCommand sqlCommand = new SqlCommand();
 
-                UserDAO userdao = new UserDAO();
-                userdao.UpdateUser(user);
-            }
+            sqlCommand.Connection = connection.ReturnConnection();
+            sqlCommand.CommandText = @"UPDATE SignUp_Info SET   
+             FirstName = @FirstName,
+             LastName = @LastName, 
+             Email = @Email,
+             Password = @Password, 
+             PhoneNumber = @PhoneNumber, 
+             CPF = @CPF, 
+             DateOfBirth = @DateOfBirth
+             WHERE id = @id";
 
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message);
-            }
+            sqlCommand.Parameters.AddWithValue("@FirstName", FirstNameSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@LastName", LastNameSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@Email", EmailSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@Password", PasswordSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@PhoneNumber", PhoneNumberSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@CPF", CPFSignUp.Text);
+            sqlCommand.Parameters.AddWithValue("@DateOfBirth", DateOfBirthSignUp.Value);
+            sqlCommand.Parameters.AddWithValue("@id", Id);
+
+            sqlCommand.ExecuteNonQuery();
+
+            MessageBox.Show("Cadastro alterado com sucesso",
+                "AVISO",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
 
             FirstNameSignUp.Clear();
             LastNameSignUp.Clear();

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.email_login = new System.Windows.Forms.TextBox();
             this.EmailLogin = new System.Windows.Forms.Label();
             this.PasswordLogin = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.password_login = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -47,12 +47,12 @@
             this.label1.Text = "Login ";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // email_login
             // 
-            this.textBox1.Location = new System.Drawing.Point(406, 253);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(227, 20);
-            this.textBox1.TabIndex = 1;
+            this.email_login.Location = new System.Drawing.Point(406, 253);
+            this.email_login.Name = "email_login";
+            this.email_login.Size = new System.Drawing.Size(227, 20);
+            this.email_login.TabIndex = 1;
             // 
             // EmailLogin
             // 
@@ -74,13 +74,13 @@
             this.PasswordLogin.TabIndex = 4;
             this.PasswordLogin.Text = "Password";
             // 
-            // textBox2
+            // password_login
             // 
-            this.textBox2.Location = new System.Drawing.Point(406, 325);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(227, 20);
-            this.textBox2.TabIndex = 3;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.password_login.Location = new System.Drawing.Point(406, 325);
+            this.password_login.Name = "password_login";
+            this.password_login.PasswordChar = '●';
+            this.password_login.Size = new System.Drawing.Size(227, 20);
+            this.password_login.TabIndex = 3;
             // 
             // button1
             // 
@@ -100,9 +100,9 @@
             this.ClientSize = new System.Drawing.Size(1141, 682);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.PasswordLogin);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.password_login);
             this.Controls.Add(this.EmailLogin);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.email_login);
             this.Controls.Add(this.label1);
             this.Name = "FormsLogin";
             this.Opacity = 0.8D;
@@ -116,10 +116,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox email_login;
         private System.Windows.Forms.Label EmailLogin;
         private System.Windows.Forms.Label PasswordLogin;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox password_login;
         private System.Windows.Forms.Button button1;
     }
 }

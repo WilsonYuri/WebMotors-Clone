@@ -90,7 +90,7 @@
             // 
             this.PasswordSignUp.Location = new System.Drawing.Point(73, 225);
             this.PasswordSignUp.Name = "PasswordSignUp";
-            this.PasswordSignUp.PasswordChar = '*';
+            this.PasswordSignUp.PasswordChar = '●';
             this.PasswordSignUp.Size = new System.Drawing.Size(441, 20);
             this.PasswordSignUp.TabIndex = 9;
             // 
@@ -296,9 +296,9 @@
             this.DateOfBirth});
             this.Overview.FullRowSelect = true;
             this.Overview.HideSelection = false;
-            this.Overview.Location = new System.Drawing.Point(39, 74);
+            this.Overview.Location = new System.Drawing.Point(563, 74);
             this.Overview.Name = "Overview";
-            this.Overview.Size = new System.Drawing.Size(1774, 946);
+            this.Overview.Size = new System.Drawing.Size(1250, 946);
             this.Overview.TabIndex = 24;
             this.Overview.UseCompatibleStateImageBehavior = false;
             this.Overview.View = System.Windows.Forms.View.Details;
@@ -370,7 +370,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.btnManage);
             this.Controls.Add(this.ManagementLabel);
             this.Controls.Add(this.PasswordPanel);
