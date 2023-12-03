@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Net;
@@ -334,35 +334,18 @@ namespace WebMotors
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Connection connection = new Connection();
-            SqlCommand sqlCommand = new SqlCommand();
+            try
+            {
+                User user = new User(FirstNameSignUp.Text, LastNameSignUp.Text, EmailSignUp.Text, PasswordSignUp.Text, PhoneNumberSignUp.Text, CPFSignUp.Text, DateOfBirthSignUp.Value);
 
-            sqlCommand.Connection = connection.ReturnConnection();
-            sqlCommand.CommandText = @"UPDATE SignUp_Info SET   
-             FirstName = @FirstName,
-             LastName = @LastName, 
-             Email = @Email,
-             Password = @Password, 
-             PhoneNumber = @PhoneNumber, 
-             CPF = @CPF, 
-             DateOfBirth = @DateOfBirth
-             WHERE id = @id";
+                UserDAO userdao = new UserDAO();
+                userdao.UpdateUser(user);
+            }
 
-            sqlCommand.Parameters.AddWithValue("@FirstName", FirstNameSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@LastName", LastNameSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@Email", EmailSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@Password", PasswordSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@PhoneNumber", PhoneNumberSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@CPF", CPFSignUp.Text);
-            sqlCommand.Parameters.AddWithValue("@DateOfBirth", DateOfBirthSignUp.Value);
-            sqlCommand.Parameters.AddWithValue("@id", Id);
-
-            sqlCommand.ExecuteNonQuery();
-
-            MessageBox.Show("Cadastro alterado com sucesso",
-                "AVISO",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
 
             FirstNameSignUp.Clear();
             LastNameSignUp.Clear();
