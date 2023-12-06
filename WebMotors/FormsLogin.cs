@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,32 +36,25 @@ namespace WebMotors
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Connection connection = new Connection();
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection.ReturnConnection();
+            string email = email_login.Text;
+            string password = password_login.Text;
 
+            UserDAO userDAO = new UserDAO();
 
-            command.CommandText = "SELECT * FROM SignUp_Info WHERE Email = @Email AND Senha = @Password";
+            User user = userDAO.LoginUser(email, password);
 
-            command.Parameters.AddWithValue("@Nome", email_login.Text);
-            command.Parameters.AddWithValue("@Senha", password_login.Text);
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            if (reader.HasRows)
+            if (user != null)
             {
-                // O nome de usuário e a senha estão corretos
-                // Abrir o próximo formulário
-
+                MessageBox.Show("Welcome, " + user.Firstname + "!");
             }
             else
             {
                 // O nome de usuário e a senha estão incorretos
-                MessageBox.Show("Email or password invalid");
+                MessageBox.Show("Email or password invalid, try again");
             }
 
 
         }
     }
-    }
+}
 

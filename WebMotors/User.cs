@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebMotors
 {
@@ -17,34 +13,35 @@ namespace WebMotors
         private string _cPF;
         private DateTime _dateOfBirth;
 
-        public User(/*int id,*/ 
-            string firstname, 
-            string lastname, 
-            string email, 
-            string password, 
-            string phonenumber, 
-            string cpf, 
+        public User(/*int id,*/
+            string firstname,
+            string lastname,
+            string email,
+            string password,
+            string phonenumber,
+            string cpf,
             DateTime dateofbirth)
         {
-             //ID = id;
-             Firstname = firstname;
-             Lastname = lastname;
-             Email = email;
-             PassWord = password;
-             PhoneNumber = phonenumber;
-             Cpf = cpf;
-             DateOfBirth = dateofbirth;
+            
+            //ID = id;
+            Firstname = firstname;
+            Lastname = lastname;
+            Email = email;
+            PassWord = password;
+            PhoneNumber = phonenumber;
+            Cpf = cpf;
+            DateOfBirth = dateofbirth;
 
         }
 
         public int ID
         {
-            set{ _id = value; }
+            set { _id = value; }
             get { return _id; }
         }
         public String Firstname
         {
-            set { _firstname = value;  }
+            set { _firstname = value; }
             get { return _firstname; }
         }
         public String Lastname
@@ -71,7 +68,7 @@ namespace WebMotors
         public String PhoneNumber
         {
             set { _phoneNumber = value; }
-            get { return PhoneNumber; }
+            get { return _phoneNumber; }
         }
         public String Cpf
         {

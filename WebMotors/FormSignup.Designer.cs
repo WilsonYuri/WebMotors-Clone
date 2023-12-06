@@ -62,6 +62,7 @@
             this.DateOfBirth = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_Submit_Edit = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
+            this.IDSig = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PasswordPanel.SuspendLayout();
             this.SuspendLayout();
@@ -217,7 +218,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(1819, 966);
+            this.pictureBox1.Location = new System.Drawing.Point(1188, 614);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(73, 63);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -227,7 +228,7 @@
             // 
             // btnManage
             // 
-            this.btnManage.Location = new System.Drawing.Point(1779, 21);
+            this.btnManage.Location = new System.Drawing.Point(1137, 12);
             this.btnManage.Name = "btnManage";
             this.btnManage.Size = new System.Drawing.Size(91, 39);
             this.btnManage.TabIndex = 25;
@@ -250,7 +251,7 @@
             this.PasswordPanel.Controls.Add(this.enter);
             this.PasswordPanel.Controls.Add(this.PasswordManagement);
             this.PasswordPanel.Controls.Add(this.PasswordManage);
-            this.PasswordPanel.Location = new System.Drawing.Point(708, 481);
+            this.PasswordPanel.Location = new System.Drawing.Point(401, 243);
             this.PasswordPanel.Name = "PasswordPanel";
             this.PasswordPanel.Size = new System.Drawing.Size(478, 102);
             this.PasswordPanel.TabIndex = 26;
@@ -296,9 +297,9 @@
             this.DateOfBirth});
             this.Overview.FullRowSelect = true;
             this.Overview.HideSelection = false;
-            this.Overview.Location = new System.Drawing.Point(563, 74);
+            this.Overview.Location = new System.Drawing.Point(471, 66);
             this.Overview.Name = "Overview";
-            this.Overview.Size = new System.Drawing.Size(1250, 946);
+            this.Overview.Size = new System.Drawing.Size(757, 526);
             this.Overview.TabIndex = 24;
             this.Overview.UseCompatibleStateImageBehavior = false;
             this.Overview.View = System.Windows.Forms.View.Details;
@@ -366,11 +367,21 @@
             this.btn_delete.UseVisualStyleBackColor = true;
             this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
+            // IDSig
+            // 
+            this.IDSig.Location = new System.Drawing.Point(0, 668);
+            this.IDSig.Name = "IDSig";
+            this.IDSig.PasswordChar = '*';
+            this.IDSig.Size = new System.Drawing.Size(11, 20);
+            this.IDSig.TabIndex = 14;
+            this.IDSig.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // FormSignup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.IDSig);
             this.Controls.Add(this.btnManage);
             this.Controls.Add(this.ManagementLabel);
             this.Controls.Add(this.PasswordPanel);
@@ -441,5 +452,6 @@
         private System.Windows.Forms.ColumnHeader DateOfBirth;
         private System.Windows.Forms.Button btn_Submit_Edit;
         private System.Windows.Forms.Button btn_delete;
+        private System.Windows.Forms.TextBox IDSig;
     }
 }

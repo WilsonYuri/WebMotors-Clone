@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
@@ -49,64 +46,62 @@ namespace WebMotors
             return detectCpf.EndsWith(digito);
         }
 
-        private static DataProtectionScope Scope = DataProtectionScope.CurrentUser;
 
-        public string Encrypt(string plainText)
+        public bool IsValidAll(string password, string email)
         {
-            if (plainText == null) throw new ArgumentNullException("plainText");
-
-            // Encrypt data
-            var data = Encoding.Unicode.GetBytes(plainText);
-            byte[] encrypted = ProtectedData.Protect(data, null, Scope);
-
-            // Return as Base64 string
-            return Convert.ToBase64String(encrypted);
-        }
-
-        public string Decrypt(string cipher)
-        {
-            if (cipher == null) throw new ArgumentNullException("cipher");
-
-            // Parse Base64 string
-            byte[] data = Convert.FromBase64String(cipher);
-
-            // Decrypt data
-            byte[] decrypted = ProtectedData.Unprotect(data, null, Scope);
-            return Encoding.Unicode.GetString(decrypted);
-        }
-
-        public bool IsValidPassword(string password)
-        {
+            bool EmailValidated;
+            bool passWordvalidated;
             // Validate strong password
-            string passwordPattern = ("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
+            string passwordPattern = @"^(?=.*[A-Za-z])[A-Za-z]{8,}$";
 
             Regex validatePassword = new Regex(passwordPattern);
 
-            return validatePassword.IsMatch(password);
+            if ((validatePassword.IsMatch(password)) == true)
+            {
+                passWordvalidated = true;
+            }
+            else
+            {
+                passWordvalidated = false;
+            }
+
+            string EmailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+            Regex validateEmail = new Regex(EmailPattern);
+            if ((validateEmail.IsMatch(email)) == true)
+            {
+                EmailValidated = true;
+            }
+            else
+            {
+                EmailValidated = false;
+            }
+
+            if ((EmailValidated == true) || (passWordvalidated == true))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public bool IsValidPhoneNumber(string phoneNumber)
-        {
-            // Validate strong password
-            string PhoneNumberPattern = ("^\\+?[1-9][0-9]{7,14}$");
-
-            Regex PhoneNumberRegex = new Regex(PhoneNumberPattern);
-
-            return PhoneNumberRegex.IsMatch(phoneNumber);
-        }
+        //public bool IsValidPhoneNumber(string phoneNumber)
+        //{
+        //    // Validate strong password
+        //    string PhoneNumberPattern = ('/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/');
 
 
-        public bool IsValidEmail(string email)
-        {
-            // Define a expressão regular para validar um endereço de e-mail
-            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+        //    Regex PhoneNumberRegex = new Regex(PhoneNumberPattern);
 
-            // Cria um objeto Regex com a expressão regular
-            Regex regex = new Regex(pattern);
+        //    return PhoneNumberRegex.IsMatch(phoneNumber);
+        //}
 
-            // Usa o método Match para verificar se o email corresponde ao padrão
-            return regex.IsMatch(email);
-        }
+        //public bool IsValidEmail(string email)
+
+        // Define a expressão regular para validar um endereço de e-mail
+
         public void DeleteUser(int Id)
         {
             Connection connection = new Connection();
@@ -159,31 +154,16 @@ namespace WebMotors
             sqlCommand.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
 
 
-            if (IsValidEmail(email) == true)
+            if (IsValidAll(password, email) == true)
             {
-                if (IsValidPassword(password) == true)
-                {
-
-                    if (IsCpf(CPF) == true)
-                    {
-                        sqlCommand.ExecuteNonQuery();
-                    }
-                    else
-                    {
-                        MessageBox.Show("O endereço de e - mail é inválido");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("A senha é inválida");
-                }
+                sqlCommand.ExecuteNonQuery();
             }
             else
             {
-                MessageBox.Show("O CPF é inválido");
+                MessageBox.Show("Password and/or email is invalid!");
             };
         }
-    
+
 
 
         public void InsertUser(User user)
@@ -202,49 +182,54 @@ namespace WebMotors
 
             sqlCommand.Parameters.AddWithValue("@FirstName", user.Firstname);
             sqlCommand.Parameters.AddWithValue("@LastName", user.Lastname);
-            sqlCommand.Parameters.AddWithValue("@Email", user.Email);
-            sqlCommand.Parameters.AddWithValue("@Password", user.PassWord);
-            sqlCommand.Parameters.AddWithValue("@PhoneNumber", user.PhoneNumber);
-            sqlCommand.Parameters.AddWithValue("@CPF", user.Cpf);
-            sqlCommand.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
 
-
-            if (IsValidEmail(email) == true)
+            if ((IsValidAll(password, email) == true) || (IsCpf(CPF) == true))
             {
-                if (IsValidPassword(password) == true)
-                {
-                    user.PassWord = Encrypt(password);
-
-                    if (IsValidPhoneNumber(phoneNumber) == true)
-                    {
-
-                        if (IsCpf(CPF) == true)
-                        {
-                            sqlCommand.ExecuteNonQuery();
-                        }
-                        else
-                        {
-                            MessageBox.Show("The CPF is invalid");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("The phone number is invalid");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("The password is invalid");
-                }
+                sqlCommand.Parameters.AddWithValue("@Email", user.Email);
+                sqlCommand.Parameters.AddWithValue("@Password", user.PassWord);
+                sqlCommand.Parameters.AddWithValue("@PhoneNumber", user.PhoneNumber);
+                sqlCommand.Parameters.AddWithValue("@CPF", user.Cpf);
+                sqlCommand.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
+                sqlCommand.ExecuteNonQuery();
             }
             else
             {
-                MessageBox.Show("The Email is invalid");
+                MessageBox.Show("The Email, Password or CPF is invalid");
             };
+        }
 
+        public User LoginUser(string email, string senha)
+        {
+            Connection connection = new Connection();
+            SqlCommand sqlCommand = new SqlCommand();
 
+            sqlCommand.Connection = connection.ReturnConnection();
+            sqlCommand.CommandText = @"SELECT * FROM SignUp_Info WHERE email = @Email AND password = @Password";
+
+            sqlCommand.Parameters.AddWithValue("@Email", email);
+            sqlCommand.Parameters.AddWithValue("@Password", senha);
+
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    User user = new User("FirstName", "LastName", "Email", "PhoneNumber", "Password", "CPF", "DateOfBirth");
+                    user.Firstname = reader.GetString(0);
+                    user.Lastname = reader.GetString(1);
+                    user.Email = reader.GetString(2);
+                    user.PhoneNumber = reader.GetString(3);
+                    user.PassWord = reader.GetString(4);
+                    user.Cpf = reader.GetString(5);
+                    user.DateOfBirth = reader.GetDateTime(6);
+                    return user;
+                }
+            }
+            return null;
 
         }
+
 
         public List<User> SelectUser()
         {
@@ -252,7 +237,7 @@ namespace WebMotors
             SqlCommand sqlCom = new SqlCommand();
 
             sqlCom.Connection = conn.ReturnConnection();
-            sqlCom.CommandText = "SELECT FirstName, LastName, Email, PhoneNumber, Password, CPF, DateOfBirth";
+            sqlCom.CommandText = "SELECT FirstName, LastName, Email, PhoneNumber, Password, CPF, DateOfBirth FROM Signup_info";
 
             List<User> Users = new List<User>();
             try
@@ -291,7 +276,7 @@ namespace WebMotors
         }
     }
 }
-        
-        
-    
+
+
+
 

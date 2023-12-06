@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 using System.Windows.Forms;
-using System.Security.Cryptography;
 //using System.IdentityModel;
 
 namespace WebMotors
@@ -49,7 +47,7 @@ namespace WebMotors
             set { created = value; }
         }
 
-            private void FormSignup_Load(object sender, EventArgs e)
+        private void FormSignup_Load(object sender, EventArgs e)
         {
 
             UpdateListView();
@@ -73,13 +71,13 @@ namespace WebMotors
             SqlCommand sqlCom = new SqlCommand();
 
             UserDAO userDAO = new UserDAO();
-            List<User> Users = userDAO.SelectUser();
+            List<User> user = userDAO.SelectUser();
 
             try
             {
-                foreach (User userItem in Users)
+                foreach (User userItem in user)
                 {
-                    ListViewItem lv = new ListViewItem(userItem.ID.ToString());
+                    ListViewItem lv = new ListViewItem(userItem.ToString());
                     lv.SubItems.Add(userItem.Firstname);
                     lv.SubItems.Add(userItem.Lastname);
                     lv.SubItems.Add(userItem.Email);
@@ -88,9 +86,6 @@ namespace WebMotors
                     lv.SubItems.Add(userItem.DateOfBirth.ToShortDateString());
                     Overview.Items.Add(lv);
                 }
-
-
-
             }
             catch (Exception err)
             {
@@ -108,7 +103,7 @@ namespace WebMotors
         {
             try
             {
-                User user = new User(FirstNameSignUp.Text, LastNameSignUp.Text, EmailSignUp.Text, PasswordSignUp.Text, PhoneNumberSignUp.Text, CPFSignUp.Text, DateOfBirthSignUp.Value);
+                User user = new User(FirstNameSignUp.Text, LastNameSignUp.Text, EmailSignUp.Text, PhoneNumberSignUp.Text, Criptografia.CriptografarSenha(PasswordSignUp.Text), CPFSignUp.Text, DateOfBirthSignUp.Value);
 
                 UserDAO userdao = new UserDAO();
                 userdao.InsertUser(user);
@@ -428,6 +423,11 @@ namespace WebMotors
         }
 
         private void PasswordManagement_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

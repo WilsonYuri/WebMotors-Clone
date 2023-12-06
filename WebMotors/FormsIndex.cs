@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WebMotors
@@ -64,7 +57,7 @@ namespace WebMotors
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -196,53 +189,35 @@ namespace WebMotors
 
         }
 
-        private void btnCallMeLater_Click(object sender, EventArgs e)
+        //private void btnCallMeLater_Click(object sender, EventArgs e)
+        //{
+        //    if (Created == true){
+        //    MethodTimer hide = new MethodTimer(hideButton);
+        //    MethodTimer show = new MethodTimer(showButton);
+
+        //    hide.Interval = 1000;
+        //    show.Interval = 5000;
+
+        //    hide.Tick += new EventHandler(t_Tick);
+        //    show.Tick += new EventHandler(t_Tick);
+
+        //    hide.Start(); show.Start();
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //}
+
+
+        internal class MethodTimer : Timer
         {
-            if (Created == true){
-            MethodTimer hide = new MethodTimer(hideButton);
-            MethodTimer show = new MethodTimer(showButton);
-
-            hide.Interval = 1000;
-            show.Interval = 5000;
-
-            hide.Tick += new EventHandler(t_Tick);
-            show.Tick += new EventHandler(t_Tick);
-
-            hide.Start(); show.Start();
-            }
-            else
+            public readonly MethodInvoker Method;
+            public MethodTimer(MethodInvoker method)
             {
-                
+                Method = method;
             }
         }
-
-            private void hideButton()
-            {
-                this.LabelSuccess.Visible = false;
-            }
-
-            private void showButton()
-            {
-                this.LabelSuccess.Visible = true;
-            }
-
-            private void t_Tick(object sender, EventArgs e)
-            {
-                MethodTimer t = (MethodTimer)sender;
-
-                t.Stop();
-                t.Method.Invoke();
-            }
-
-
-            internal class MethodTimer : Timer
-            {
-                public readonly MethodInvoker Method;
-                public MethodTimer(MethodInvoker method)
-                {
-                    Method = method;
-                }
-            }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -250,6 +225,11 @@ namespace WebMotors
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
         {
 
         }

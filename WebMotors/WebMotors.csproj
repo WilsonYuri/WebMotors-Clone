@@ -48,7 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Car.cs" />
+    <Compile Include="carDAO.cs" />
+    <Compile Include="Cars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cars.Designer.cs">
+      <DependentUpon>Cars.cs</DependentUpon>
+    </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="Criptografia.cs" />
     <Compile Include="FormSignup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +80,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserDAO.cs" />
+    <EmbeddedResource Include="Cars.resx">
+      <DependentUpon>Cars.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSignup.resx">
       <DependentUpon>FormSignup.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +119,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Sources\Icons\free-car-icon-2901-thumb.png" />
     <Content Include="Sources\RowCars1\Corolla.jpg" />
     <Content Include="Sources\RowCars1\Fiat Chronos.jpg" />
     <Content Include="Sources\RowCars1\Fiat Toro.jpg" />
