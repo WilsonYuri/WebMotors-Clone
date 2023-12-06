@@ -53,6 +53,7 @@
             this.email_login.Name = "email_login";
             this.email_login.Size = new System.Drawing.Size(227, 20);
             this.email_login.TabIndex = 1;
+            this.email_login.TextChanged += new System.EventHandler(this.email_login_TextChanged);
             // 
             // EmailLogin
             // 

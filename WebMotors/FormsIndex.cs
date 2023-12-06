@@ -5,14 +5,10 @@ namespace WebMotors
 {
     public partial class FormsIndex : Form
     {
-        private bool Created = false;
+        //private bool Created = false;
         public FormsIndex()
         {
-            InitializeComponent();
-            btnLogin.FlatStyle = FlatStyle.Flat;
-            btnLogin.FlatAppearance.BorderSize = 0;
-            btnSignUp.FlatStyle = FlatStyle.Flat;
-            btnSignUp.FlatAppearance.BorderSize = 0;
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -81,7 +77,12 @@ namespace WebMotors
             FormSignup formsSignup = new FormSignup();
             formsSignup.ShowDialog();
 
-            Created = formsSignup.Created;
+            //Created = formsSignup.Created;
+        }
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            Cars carPage = new Cars();
+            carPage.ShowDialog();
         }
 
         private void checkBox21_CheckedChanged(object sender, EventArgs e)
@@ -210,14 +211,14 @@ namespace WebMotors
         //}
 
 
-        internal class MethodTimer : Timer
-        {
-            public readonly MethodInvoker Method;
-            public MethodTimer(MethodInvoker method)
-            {
-                Method = method;
-            }
-        }
+        //internal class MethodTimer : Timer
+        //{
+        //    public readonly MethodInvoker Method;
+        //    public MethodTimer(MethodInvoker method)
+        //    {
+        //        Method = method;
+        //    }
+        //}
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -229,9 +230,5 @@ namespace WebMotors
 
         }
 
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

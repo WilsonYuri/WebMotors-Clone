@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSignup));
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "1",
+            "Wilson Yuri",
+            "Moreira da Paixão",
+            "wilsonyuri@icloud.com",
+            "(12) 99752-9783",
+            "654.615.485-62",
+            "10/21/2006"}, -1);
             this.Submit = new System.Windows.Forms.Button();
             this.PasswordLogin = new System.Windows.Forms.Label();
             this.PasswordSignUp = new System.Windows.Forms.TextBox();
@@ -40,9 +48,7 @@
             this.labelLastName = new System.Windows.Forms.Label();
             this.LastNameSignUp = new System.Windows.Forms.TextBox();
             this.PhoneNumber = new System.Windows.Forms.Label();
-            this.PhoneNumberSignUp = new System.Windows.Forms.TextBox();
             this.labelCPF = new System.Windows.Forms.Label();
-            this.CPFSignUp = new System.Windows.Forms.TextBox();
             this.labelBirth = new System.Windows.Forms.Label();
             this.DateOfBirthSignUp = new System.Windows.Forms.DateTimePicker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -63,6 +69,9 @@
             this.btn_Submit_Edit = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.IDSig = new System.Windows.Forms.TextBox();
+            this.CPFSignUp = new System.Windows.Forms.MaskedTextBox();
+            this.PhoneNumberSignUp = new System.Windows.Forms.MaskedTextBox();
+            this.btnGerarPdf = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PasswordPanel.SuspendLayout();
             this.SuspendLayout();
@@ -168,14 +177,6 @@
             this.PhoneNumber.TabIndex = 17;
             this.PhoneNumber.Text = "Phone Number";
             // 
-            // PhoneNumberSignUp
-            // 
-            this.PhoneNumberSignUp.Location = new System.Drawing.Point(73, 279);
-            this.PhoneNumberSignUp.Name = "PhoneNumberSignUp";
-            this.PhoneNumberSignUp.Size = new System.Drawing.Size(211, 20);
-            this.PhoneNumberSignUp.TabIndex = 16;
-            this.PhoneNumberSignUp.TextChanged += new System.EventHandler(this.PhoneNumberSignUp_TextChanged);
-            // 
             // labelCPF
             // 
             this.labelCPF.AutoSize = true;
@@ -185,13 +186,6 @@
             this.labelCPF.Size = new System.Drawing.Size(27, 13);
             this.labelCPF.TabIndex = 19;
             this.labelCPF.Text = "CPF";
-            // 
-            // CPFSignUp
-            // 
-            this.CPFSignUp.Location = new System.Drawing.Point(73, 332);
-            this.CPFSignUp.Name = "CPFSignUp";
-            this.CPFSignUp.Size = new System.Drawing.Size(211, 20);
-            this.CPFSignUp.TabIndex = 18;
             // 
             // labelBirth
             // 
@@ -245,6 +239,7 @@
             this.ManagementLabel.Size = new System.Drawing.Size(293, 20);
             this.ManagementLabel.TabIndex = 27;
             this.ManagementLabel.Text = "Management of the login database ";
+            this.ManagementLabel.Click += new System.EventHandler(this.ManagementLabel_Click);
             // 
             // PasswordPanel
             // 
@@ -297,9 +292,11 @@
             this.DateOfBirth});
             this.Overview.FullRowSelect = true;
             this.Overview.HideSelection = false;
-            this.Overview.Location = new System.Drawing.Point(471, 66);
+            this.Overview.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.Overview.Location = new System.Drawing.Point(584, 66);
             this.Overview.Name = "Overview";
-            this.Overview.Size = new System.Drawing.Size(757, 526);
+            this.Overview.Size = new System.Drawing.Size(644, 526);
             this.Overview.TabIndex = 24;
             this.Overview.UseCompatibleStateImageBehavior = false;
             this.Overview.View = System.Windows.Forms.View.Details;
@@ -327,7 +324,7 @@
             // 
             this.Email.Text = "Email";
             this.Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Email.Width = 116;
+            this.Email.Width = 125;
             // 
             // columnHeader1
             // 
@@ -339,7 +336,7 @@
             // 
             this.CPF.Text = "CPF";
             this.CPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.CPF.Width = 86;
+            this.CPF.Width = 94;
             // 
             // DateOfBirth
             // 
@@ -376,11 +373,40 @@
             this.IDSig.TabIndex = 14;
             this.IDSig.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
+            // CPFSignUp
+            // 
+            this.CPFSignUp.Location = new System.Drawing.Point(73, 332);
+            this.CPFSignUp.Mask = "000.000.000-00";
+            this.CPFSignUp.Name = "CPFSignUp";
+            this.CPFSignUp.Size = new System.Drawing.Size(211, 20);
+            this.CPFSignUp.TabIndex = 33;
+            // 
+            // PhoneNumberSignUp
+            // 
+            this.PhoneNumberSignUp.Location = new System.Drawing.Point(73, 276);
+            this.PhoneNumberSignUp.Mask = "(00) 00000-9999";
+            this.PhoneNumberSignUp.Name = "PhoneNumberSignUp";
+            this.PhoneNumberSignUp.Size = new System.Drawing.Size(211, 20);
+            this.PhoneNumberSignUp.TabIndex = 34;
+            // 
+            // btnGerarPdf
+            // 
+            this.btnGerarPdf.Location = new System.Drawing.Point(1040, 12);
+            this.btnGerarPdf.Name = "btnGerarPdf";
+            this.btnGerarPdf.Size = new System.Drawing.Size(91, 39);
+            this.btnGerarPdf.TabIndex = 35;
+            this.btnGerarPdf.Text = "Generate Report";
+            this.btnGerarPdf.UseVisualStyleBackColor = true;
+            this.btnGerarPdf.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // FormSignup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.btnGerarPdf);
+            this.Controls.Add(this.PhoneNumberSignUp);
+            this.Controls.Add(this.CPFSignUp);
             this.Controls.Add(this.IDSig);
             this.Controls.Add(this.btnManage);
             this.Controls.Add(this.ManagementLabel);
@@ -390,9 +416,7 @@
             this.Controls.Add(this.DateOfBirthSignUp);
             this.Controls.Add(this.labelBirth);
             this.Controls.Add(this.labelCPF);
-            this.Controls.Add(this.CPFSignUp);
             this.Controls.Add(this.PhoneNumber);
-            this.Controls.Add(this.PhoneNumberSignUp);
             this.Controls.Add(this.labelLastName);
             this.Controls.Add(this.LastNameSignUp);
             this.Controls.Add(this.labelFirstName);
@@ -430,9 +454,7 @@
         private System.Windows.Forms.Label labelLastName;
         private System.Windows.Forms.TextBox LastNameSignUp;
         private System.Windows.Forms.Label PhoneNumber;
-        private System.Windows.Forms.TextBox PhoneNumberSignUp;
         private System.Windows.Forms.Label labelCPF;
-        private System.Windows.Forms.TextBox CPFSignUp;
         private System.Windows.Forms.Label labelBirth;
         private System.Windows.Forms.DateTimePicker DateOfBirthSignUp;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -453,5 +475,8 @@
         private System.Windows.Forms.Button btn_Submit_Edit;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.TextBox IDSig;
+        private System.Windows.Forms.MaskedTextBox CPFSignUp;
+        private System.Windows.Forms.MaskedTextBox PhoneNumberSignUp;
+        private System.Windows.Forms.Button btnGerarPdf;
     }
 }

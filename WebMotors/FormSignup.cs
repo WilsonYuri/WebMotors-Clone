@@ -1,6 +1,10 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows.Forms;
 //using System.IdentityModel;
 
@@ -11,7 +15,7 @@ namespace WebMotors
         public int Id;
 
 
-        private bool created = false;
+        //private bool created = false;
         public FormSignup()
         {
             InitializeComponent();
@@ -21,6 +25,7 @@ namespace WebMotors
             btnManage.Visible = false;
             btn_Submit_Edit.Visible = false;
             btn_delete.Visible = false;
+            btnGerarPdf.Visible = false;
             // --
             SignInLabel.Visible = true;
             FirstNameSignUp.Visible = true;
@@ -41,11 +46,11 @@ namespace WebMotors
             Submit.Visible = true;
         }
 
-        public bool Created
-        {
-            get { return created; }
-            set { created = value; }
-        }
+        //public bool Created
+        //{
+        //    get { return created; }
+        //    set { created = value; }
+        //}
 
         private void FormSignup_Load(object sender, EventArgs e)
         {
@@ -77,7 +82,7 @@ namespace WebMotors
             {
                 foreach (User userItem in user)
                 {
-                    ListViewItem lv = new ListViewItem(userItem.ToString());
+                    ListViewItem lv = new ListViewItem(userItem.ID.ToString());
                     lv.SubItems.Add(userItem.Firstname);
                     lv.SubItems.Add(userItem.Lastname);
                     lv.SubItems.Add(userItem.Email);
@@ -103,7 +108,7 @@ namespace WebMotors
         {
             try
             {
-                User user = new User(FirstNameSignUp.Text, LastNameSignUp.Text, EmailSignUp.Text, PhoneNumberSignUp.Text, Criptografia.CriptografarSenha(PasswordSignUp.Text), CPFSignUp.Text, DateOfBirthSignUp.Value);
+                User user = new User(FirstNameSignUp.Text, LastNameSignUp.Text, EmailSignUp.Text, PhoneNumberSignUp.Text, PasswordSignUp.Text, CPFSignUp.Text, DateOfBirthSignUp.Value);
 
                 UserDAO userdao = new UserDAO();
                 userdao.InsertUser(user);
@@ -164,6 +169,8 @@ namespace WebMotors
                 btnManage.Visible = true;
                 PasswordPanel.Visible = false;
                 ManagementLabel.Visible = true;
+                btnGerarPdf.Visible = true;
+
             }
         }
 
@@ -428,6 +435,45 @@ namespace WebMotors
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Connection connect = new Connection();
+            SqlConnection connection = connect.ReturnConnection();
+
+            string query = "SELECT * FROM SignUp_Info WHERE ID = @ID";
+            SqlCommand command = new SqlCommand(query, connection);
+
+            //command.Parameters.AddWithValue("@ID", user.ID);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable dataTable = new DataTable();
+
+            adapter.Fill(dataTable);
+
+            Document document = new Document();
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            PdfWriter.GetInstance(document, new FileStream(path + "/Relatorio.pdf", FileMode.Create));
+
+            document.Open();
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    document.Add(new Paragraph(row[column].ToString()));
+                }
+            }
+            document.Close();
+            connect.CloseConnection();
+
+            MessageBox.Show("Relatório gerado com sucesso!");
+        }
+
+        private void ManagementLabel_Click(object sender, EventArgs e)
         {
 
         }
