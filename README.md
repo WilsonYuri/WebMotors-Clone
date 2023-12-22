@@ -14,5 +14,5 @@ Before testing it, make sure that you follow the requirements below:
 - You are running this project on the latest version of `Visual Studio`
 
 ## ⚠️ Caution
-1. Before testing my code, you should know that the connection with the `Microsoft SQL Server` database is mess and it will not work.
+1. Before testing my code, you should know that the connection with the `Microsoft SQL Server` database is a mess and it will not work.
 2. Because of the last error, some elements like listView or some button functions will not work.
